@@ -45,6 +45,7 @@ ctx._strokeText = (text, x, y) => {
 const drawAxis = () => {
     ctx.beginPath();
     ctx.strokeStyle = "black";
+    ctx.fillStyle = "black"
     ctx.lineWidth = 1;
 
         ctx._moveTo(0, 0);
@@ -52,20 +53,22 @@ const drawAxis = () => {
         ctx._moveTo(0, 0);
         ctx._lineTo(0, 50);
         ctx.stroke();
-    
+
+        ctx.font = '30px arial';
+
         for (let x=0; x < 50; x++)
         {
             if (x % 2 != 0)
                 continue;
 
-            ctx.strokeText(`${x}`, ...toPixels(x, deltaText));
+            ctx.fillText(`${x}`, ...toPixels(x, deltaText));
         }
     
         for (let y=0; y < 50; y++)
         {
             if (y % 2 != 0)
                 continue;
-            ctx.strokeText(`${y}`, ...toPixels(deltaText, y));
+            ctx.fillText(`${y}`, ...toPixels(deltaText, y));
         }
     
     ctx.closePath();
@@ -171,9 +174,11 @@ const drawIntegral = (n=1, drawText=true, stroke=true) => {
 
     if (drawText)
     {
+        ctx.fillStyle = "black"
         for (let i=0; i < tex_cords.length; i++)
         {
-            ctx.strokeText(`${rect + 1}`, ...tex_cords[i]);
+            let _str = `${rect + 1}`
+            ctx.fillText(_str, ...[tex_cords[i][0] -  ( (_str.length-1) * 15), tex_cords[i][1]] );
             rect++;
         }
     }    
